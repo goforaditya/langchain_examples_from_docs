@@ -22,7 +22,22 @@ from langchain_core.messages import HumanMessage, SystemMessage
 
 messages = [
     SystemMessage(content="Translate the following from english to hindi."),
-    HumanMessage(content="hi!")
+    HumanMessage(content="hi! i love playing with data and would also like to experiment with AI and langchain")
 ]
 
 print(model.invoke(messages))
+
+# Both input and output of ChatModel is a Messages object  https://github.com/goforaditya/langchain_examples_from_docs
+# Messages object can also hold coversation roles and tool calls etc.,
+#
+
+# We can also use OpenAI goforaditya
+
+model.invoke([{"role": "user", "content": "Hello"}])
+
+model.invoke([HumanMessage("Hello")])
+
+# We can also stream individual tokens instead of waiting for complete output form the model
+
+for token in model.stream(messages):
+    print(token.content, end="|")
