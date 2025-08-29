@@ -7,22 +7,11 @@ from langchain.chat_models import init_chat_model
 
 model = init_chat_model("meta-llama/llama-3.3-8b-instruct:free", model_provider="openai", base_url="https://openrouter.ai/api/v1", api_key=os.environ["OPENROUTER_KEY"])
 
-from langchain_core.messages import HumanMessage, SystemMessage
-
-# This implements the Messages concept of langchain https://python.langchain.com/docs/concepts/messages/
-# langchain core library provides a lot of Standardization using concepts https://python.langchain.com/docs/concepts/
-
-messages = [
-    SystemMessage(content="Translate the following from english to hindi."),
-    HumanMessage(content="hi! i love playing with data and would also like to experiment with AI and langchain")
-]
-
-print(model.invoke(messages))
 
 # The Prompt templates concept can help us build this out.
 # A prompt templates takes raw user input and return a LLM ready prompt
 
-form langchain_core.prompts import ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate
 
 system_template = "Translate the following from English into {language}"
 
@@ -44,4 +33,4 @@ print("CONVERTED_PROMPT->", prompt.to_messages())
 
 # invoke
 response = model.invoke(prompt)
-print(response.content)
+print("\n\nMODEL_RESPONSE->", response.content)
